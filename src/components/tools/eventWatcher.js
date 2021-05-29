@@ -18,7 +18,30 @@ export default function eventWatcher(e, method, data) {
       method(update(data, { todo_body: { $set: e.currentTarget.value } }));
       break;
     case "todo-submit":
-      method({ type: TODO_SEND_REQUESTED, payload: data });
+      method[0]({ type: TODO_SEND_REQUESTED, payload: data });
+      method[1](false);
+      break;
+    case "todo-edit":
+      method(true);
+      break;
+    case "todo-edit-title":
+      method(update(data, { todo_title: { $set: e.currentTarget.value } }));
+      break;
+    case "todo-edit-body":
+      method(update(data, { todo_body: { $set: e.currentTarget.value } }));
+      break;
+    case "todo-edit-submit":
+      method[0]({
+        id: { todo_id: e.currentTarget.dataset.id },
+        details: {
+          todo_title: data.todo_title || e.currentTarget.dataset.wasTitle,
+          todo_body: data.todo_body || e.currentTarget.dataset.wasBody,
+        },
+      });
+      method[1](false);
+      break;
+    case "todo-delete":
+      method();
       break;
     default:
       break;

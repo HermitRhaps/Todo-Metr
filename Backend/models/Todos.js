@@ -7,7 +7,6 @@ const Todos = props.sequelize.define(
     todo_id: { type: DataTypes.INTEGER, primaryKey: true },
     todo_title: DataTypes.STRING,
     todo_body: DataTypes.STRING,
-    todo_status: DataTypes.BOOLEAN,
   },
   {
     freezeTableName: true,

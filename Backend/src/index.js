@@ -31,16 +31,21 @@ app.post("/todo/add", (req, res) => {
 app.put("/todo/edit", (req, res) => {
   let detail = req.body.details;
   let id = req.body.id;
+
   Todos.update(detail, {
-    where: { todo_id: id },
-  }).then((response) => res.send({ response }));
+    where: { todo_id: Number(id.todo_id) },
+  }).then(() =>
+    Todos.findAll().then((response) => res.send({ response: response }))
+  );
 });
 
 app.delete("/todo/delete/", (req, res) => {
   let id = req.body.id;
   Todos.destroy({
     where: { todo_id: id },
-  }).then((response) => res.send({ response }));
+  }).then(() =>
+    Todos.findAll().then((response) => res.send({ response: response }))
+  );
 });
 
 app.listen(3001, () => {
