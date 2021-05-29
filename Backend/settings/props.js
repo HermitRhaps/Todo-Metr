@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 const props = {
-  sequelize: new Sequelize("Todosmetr_app", "dev", "eRs!19aBBn", {
+  sequelize: new Sequelize("Todosmetr_app", "SOME_USER", "SOME_PASS", {
     host: "127.0.0.1",
     dialect: "mysql",
     logging: false,
